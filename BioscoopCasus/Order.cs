@@ -16,7 +16,7 @@ namespace BioscoopCasus
 
         [JsonInclude]
         [JsonPropertyName("tickets")]
-        private List<MovieTicket> _tickets;
+        private List<MovieTicket> _tickets { get; set; }
 
         public Order(int orderNr, bool isStudentOrder)
         {
@@ -120,14 +120,18 @@ namespace BioscoopCasus
         }
 
         private void ExportToPlainText() {
-           
-        }  
-        
+            var fileName = "order-output.txt";
+            string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
+            File.WriteAllText(filePath, this.ToString());
+            Console.WriteLine($"Plain Text output saved at: {filePath}");
+        }
+
         private void ExportToJson() {
             var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            string filePath = Path.Combine(Environment.CurrentDirectory, "order-output.json");
+            var fileName = "order-output.json";
+            string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
             File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(json));
-            Console.WriteLine($"Output saved at: {filePath}");
+            Console.WriteLine($"JSON output saved at: {filePath}");
         }
 
         private double CalculateSecondTicketOff(List<MovieTicket> tickets)
@@ -185,5 +189,16 @@ namespace BioscoopCasus
             return ticket.IsPremiumTicket() ? ticket.GetPrice() + 3 : ticket.GetPrice();
         }
 
+        public override string ToString() {
+            var builder = new StringBuilder();
+            builder.AppendLine($"Order number: {this._orderNr}");
+            builder.AppendLine($"Is student: {this._isStudent}");
+            builder.AppendLine("Tickets:");
+
+            for(int i = 0; i < _tickets.Count; i++) {
+                builder.AppendLine($"{i + 1}. {this._tickets[i].ToString()}");
+            }
+            return builder.ToString();
+        }
     }
 }
