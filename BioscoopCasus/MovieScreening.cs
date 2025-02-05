@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BioscoopCasus
 {
     internal class MovieScreening
     {
-
+        [JsonInclude]
+        [JsonPropertyName("dateAndTime")]
         private DateTime _dateAndTime;
+
+        [JsonInclude]
+        [JsonPropertyName("pricePerSeat")]
         private double _pricePerSeat;
+
+        [JsonInclude]
+        [JsonPropertyName("movie")]
         private Movie _movie;
 
         public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat)

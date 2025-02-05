@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BioscoopCasus
 {
     internal class Order
     {
+        [JsonInclude]
+        [JsonPropertyName("orderNr")]
+        private int _orderNr { get; set; }
 
-        private int _orderNr;
-        private bool _isStudent;
+        [JsonInclude]
+        [JsonPropertyName("isStudent")]
+        private bool _isStudent { get; set; }
 
+        [JsonInclude]
+        [JsonPropertyName("tickets")]
         private List<MovieTicket> _tickets;
 
         public Order(int orderNr, bool isStudentOrder)
@@ -106,7 +109,25 @@ namespace BioscoopCasus
 
         public void Export(TicketExportFormat exportFormat)
         {
+            switch (exportFormat) {
+                case TicketExportFormat.PLAINTEXT:
+                    ExportToPlainText();
+                    break;
+                case TicketExportFormat.JSON:
+                    ExportToJson();
+                    break;
+            }
+        }
 
+        private void ExportToPlainText() {
+           
+        }  
+        
+        private void ExportToJson() {
+            var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            string filePath = Path.Combine(Environment.CurrentDirectory, "order-output.json");
+            File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(json));
+            Console.WriteLine($"Output saved at: {filePath}");
         }
 
         private double CalculateSecondTicketOff(List<MovieTicket> tickets)

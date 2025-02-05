@@ -14,4 +14,6 @@ order.AddSeatReservation(movieTicket1);
 order.AddSeatReservation(movieTicket2);
 order.AddSeatReservation(movieTicket3);
 
+order.Export(TicketExportFormat.JSON);
+
 Console.WriteLine(order.CalculatePrice());

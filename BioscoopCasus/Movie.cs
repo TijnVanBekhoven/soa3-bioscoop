@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BioscoopCasus
@@ -10,6 +11,8 @@ namespace BioscoopCasus
     internal class Movie
     {
 
+        [JsonInclude]
+        [JsonPropertyName("title")]
         private string _title;
         private List<MovieScreening> _screenings;
 
