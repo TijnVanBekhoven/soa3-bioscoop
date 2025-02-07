@@ -1,10 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System;
 
 namespace BioscoopCasus
 {
-    internal class Order
+    public class Order
     {
         [JsonInclude]
         [JsonPropertyName("orderNr")]
@@ -156,7 +157,7 @@ namespace BioscoopCasus
 
         private bool IsOnWeekDay(DateTime dateTime)
         {
-            string[] weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday"];
+            DayOfWeek[] weekDays = [DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday];
 
             foreach (var day in weekDays)
             {

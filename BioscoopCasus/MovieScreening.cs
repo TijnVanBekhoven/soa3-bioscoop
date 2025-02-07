@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BioscoopCasus
 {
-    internal class MovieScreening
+    public class MovieScreening
     {
         [JsonInclude]
         [JsonPropertyName("dateAndTime")]

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BioscoopCasus
 {
-    internal class MovieTicket
+    public class MovieTicket
     {
         [JsonInclude]
         [JsonPropertyName("rowNr")]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BioscoopCasus
 {
-    internal class Movie
+    public class Movie
     {
 
         [JsonInclude]
