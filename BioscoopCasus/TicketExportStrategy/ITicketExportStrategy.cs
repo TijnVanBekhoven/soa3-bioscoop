@@ -1,5 +1,5 @@
 ﻿namespace BioscoopCasus.TicketExportStrategy {
     public interface ITicketExportStrategy {
-        void export(Order order);
+        void Export(Order order);
     }
 }

@@ -53,7 +53,7 @@ namespace BioscoopCasus
         public void Export()
         {
             if (_exportStrategy == null) throw new Exception("Export format not set");
-            _exportStrategy.export(this);
+            _exportStrategy.Export(this);
         }
 
         public void SetExportFormat(ITicketExportStrategy exportStrategy) {

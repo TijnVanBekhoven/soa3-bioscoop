@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace BioscoopCasus.TicketExportStrategy {
     internal class JsonExportStrategy : ITicketExportStrategy {
-        public void export(Order order) {
+        public void Export(Order order) {
             var json = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
             var fileName = "order-output.json";
             string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
