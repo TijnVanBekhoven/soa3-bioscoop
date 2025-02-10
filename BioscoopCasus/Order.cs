@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System;
+using BioscoopCasus.TicketExport;
 
 namespace BioscoopCasus
 {
@@ -18,6 +19,8 @@ namespace BioscoopCasus
         [JsonInclude]
         [JsonPropertyName("tickets")]
         private List<MovieTicket> _tickets { get; set; }
+
+        private ITicketExportFormat? _exportFormat;
 
         public Order(int orderNr, bool isStudentOrder)
         {
@@ -108,31 +111,14 @@ namespace BioscoopCasus
             return price;
         }
 
-        public void Export(TicketExportFormat exportFormat)
+        public void Export()
         {
-            switch (exportFormat) {
-                case TicketExportFormat.PLAINTEXT:
-                    ExportToPlainText();
-                    break;
-                case TicketExportFormat.JSON:
-                    ExportToJson();
-                    break;
-            }
+            if (_exportFormat == null) throw new Exception("Export format not set");
+            _exportFormat.export(this);
         }
 
-        private void ExportToPlainText() {
-            var fileName = "order-output.txt";
-            string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
-            File.WriteAllText(filePath, this.ToString());
-            Console.WriteLine($"Plain Text output saved at: {filePath}");
-        }
-
-        private void ExportToJson() {
-            var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            var fileName = "order-output.json";
-            string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
-            File.WriteAllBytes(filePath, Encoding.UTF8.GetBytes(json));
-            Console.WriteLine($"JSON output saved at: {filePath}");
+        public void SetExportFormat(ITicketExportFormat exportFormat) {
+            _exportFormat = exportFormat;
         }
 
         private double CalculateSecondTicketOff(List<MovieTicket> tickets)
