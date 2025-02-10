@@ -1,5 +1,5 @@
-﻿namespace BioscoopCasus.TicketExport {
-    internal class PlainTextExportFormat : ITicketExportFormat {
+﻿namespace BioscoopCasus.TicketExportStrategy {
+    internal class PlainTextExportStrategy : ITicketExportStrategy {
         public void export(Order order) {
             var fileName = "order-output.txt";
             string filePath = Path.Combine(Environment.CurrentDirectory, fileName);

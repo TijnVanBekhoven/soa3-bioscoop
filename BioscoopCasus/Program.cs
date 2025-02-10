@@ -1,5 +1,5 @@
 ﻿using BioscoopCasus;
-using BioscoopCasus.TicketExport;
+using BioscoopCasus.TicketExportStrategy;
 
 Movie movie = new Movie("Jurassic Park");
 MovieScreening movieScreening1 = new MovieScreening(movie, new DateTime(2025, 1, 1), 5.5);
@@ -15,9 +15,9 @@ order.AddSeatReservation(movieTicket1);
 order.AddSeatReservation(movieTicket2);
 order.AddSeatReservation(movieTicket3);
 
-order.SetExportFormat(new JsonExportFormat());
+order.SetExportFormat(new JsonExportStrategy());
 order.Export();
-order.SetExportFormat(new PlainTextExportFormat());
+order.SetExportFormat(new PlainTextExportStrategy());
 order.Export();
 
 Console.WriteLine(order.CalculatePrice());

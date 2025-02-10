@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
 
-namespace BioscoopCasus.TicketExport {
-    internal class JsonExportFormat : ITicketExportFormat {
+namespace BioscoopCasus.TicketExportStrategy {
+    internal class JsonExportStrategy : ITicketExportStrategy {
         public void export(Order order) {
             var json = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
             var fileName = "order-output.json";
