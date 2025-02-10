@@ -28,7 +28,7 @@ jobs:
 
       # Execute all unit tests in the solution
       - name: Execute unit tests
-        run: dotnet test --collect "Code coverage"
+        run: dotnet test --collect:"XPlat Code Coverage"
 
   analyze:
     needs: [ test ]
