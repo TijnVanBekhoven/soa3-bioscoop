@@ -15,9 +15,9 @@ order.AddSeatReservation(movieTicket1);
 order.AddSeatReservation(movieTicket2);
 order.AddSeatReservation(movieTicket3);
 
-order.SetExportFormat(new JsonExportStrategy());
+order.SetExportStrategy(new JsonExportStrategy());
 order.Export();
-order.SetExportFormat(new PlainTextExportStrategy());
+order.SetExportStrategy(new PlainTextExportStrategy());
 order.Export();
 
 Console.WriteLine(order.CalculatePrice());
